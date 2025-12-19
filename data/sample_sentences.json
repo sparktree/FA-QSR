@@ -1,0 +1,171 @@
+{
+  "description": "Sample spatial sentences for FA-QSR testing",
+  "version": "1.0",
+  "categories": {
+    "functional_support": {
+      "description": "Sentences involving functional support relations",
+      "examples": [
+        {
+          "text": "The cup is on the table",
+          "triples": [["cup", "on", "table"]],
+          "sense": "on_support",
+          "support_type": "horizontal"
+        },
+        {
+          "text": "The picture hangs on the wall",
+          "triples": [["picture", "on", "wall"]],
+          "sense": "on_vertical",
+          "support_type": "vertical"
+        },
+        {
+          "text": "The coat is on the hook",
+          "triples": [["coat", "on", "hook"]],
+          "sense": "on_hanging",
+          "support_type": "hanging"
+        },
+        {
+          "text": "The books are on the shelf",
+          "triples": [["books", "on", "shelf"]],
+          "sense": "on_support",
+          "support_type": "horizontal"
+        },
+        {
+          "text": "The poster is on the door",
+          "triples": [["poster", "on", "door"]],
+          "sense": "on_vertical",
+          "support_type": "vertical"
+        }
+      ]
+    },
+    "functional_containment": {
+      "description": "Sentences involving functional containment relations",
+      "examples": [
+        {
+          "text": "The flowers are in the vase",
+          "triples": [["flowers", "in", "vase"]],
+          "sense": "in_container",
+          "containment_type": "partial"
+        },
+        {
+          "text": "The water is in the cup",
+          "triples": [["water", "in", "cup"]],
+          "sense": "in_container",
+          "containment_type": "physical"
+        },
+        {
+          "text": "The fish are in the net",
+          "triples": [["fish", "in", "net"]],
+          "sense": "in_functional",
+          "containment_type": "permeable"
+        },
+        {
+          "text": "The cat is in the room",
+          "triples": [["cat", "in", "room"]],
+          "sense": "in_region",
+          "containment_type": "regional"
+        },
+        {
+          "text": "The city is in the country",
+          "triples": [["city", "in", "country"]],
+          "sense": "in_region",
+          "containment_type": "regional"
+        }
+      ]
+    },
+    "projective": {
+      "description": "Sentences with projective spatial relations",
+      "examples": [
+        {
+          "text": "The lamp is above the table",
+          "triples": [["lamp", "above", "table"]],
+          "sense": "above_vertical",
+          "is_functional": false
+        },
+        {
+          "text": "The rug is below the table",
+          "triples": [["rug", "below", "table"]],
+          "sense": "below_vertical",
+          "is_functional": false
+        },
+        {
+          "text": "The car is behind the house",
+          "triples": [["car", "behind", "house"]],
+          "sense": "behind_projective",
+          "is_functional": false
+        },
+        {
+          "text": "The garden is in front of the building",
+          "triples": [["garden", "in front of", "building"]],
+          "sense": "front_projective",
+          "is_functional": false
+        }
+      ]
+    },
+    "proximity": {
+      "description": "Sentences with proximity relations",
+      "examples": [
+        {
+          "text": "The dog is near the house",
+          "triples": [["dog", "near", "house"]],
+          "sense": "near_proximity"
+        },
+        {
+          "text": "The store is at the corner",
+          "triples": [["store", "at", "corner"]],
+          "sense": "at_location"
+        },
+        {
+          "text": "The chair is by the window",
+          "triples": [["chair", "by", "window"]],
+          "sense": "by_adjacency"
+        }
+      ]
+    },
+    "complex": {
+      "description": "Sentences with multiple spatial relations",
+      "examples": [
+        {
+          "text": "The flowers are in the vase on the table",
+          "triples": [["flowers", "in", "vase"], ["vase", "on", "table"]],
+          "notes": "Chain of support and containment"
+        },
+        {
+          "text": "The picture on the wall is above the desk",
+          "triples": [["picture", "on", "wall"], ["picture", "above", "desk"]],
+          "notes": "Functional and projective combination"
+        },
+        {
+          "text": "The cat in the box is on the shelf in the closet",
+          "triples": [["cat", "in", "box"], ["box", "on", "shelf"], ["shelf", "in", "closet"]],
+          "notes": "Multiple chained relations"
+        }
+      ]
+    }
+  },
+  "test_cases": {
+    "consistency": [
+      {
+        "text": "A is inside B. B is inside C.",
+        "expected_consistent": true,
+        "expected_inference": "A is inside C (transitivity)"
+      },
+      {
+        "text": "A is inside B. B is inside A.",
+        "expected_consistent": false,
+        "notes": "Cyclic containment is inconsistent for strict containment"
+      }
+    ],
+    "complexity": [
+      {
+        "description": "Pure geometric - tractable",
+        "relations": ["TPP", "NTPP"],
+        "expected_complexity": "polynomial"
+      },
+      {
+        "description": "Hybrid functional-geometric",
+        "has_functional": true,
+        "expected_complexity": "np-hard"
+      }
+    ]
+  }
+}

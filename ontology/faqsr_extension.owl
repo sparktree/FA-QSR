@@ -1,0 +1,300 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://faqsr.spatial-reasoning.org/ontology/faqsr#"
+     xml:base="http://faqsr.spatial-reasoning.org/ontology/faqsr"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:gum="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3.owl#"
+     xmlns:gum-space="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3-space.owl#"
+     xmlns:faqsr="http://faqsr.spatial-reasoning.org/ontology/faqsr#">
+
+    <owl:Ontology rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr">
+        <owl:imports rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3-space.owl"/>
+        <rdfs:label>FA-QSR: Functionally-Augmented Qualitative Spatial Reasoning Ontology</rdfs:label>
+        <rdfs:comment>This ontology extends the GUM-3 spatial ontology with formal functional primitives
+for qualitative spatial reasoning. It bridges linguistic spatial modalities from GUM with
+algebraic constraint-based reasoning mechanisms from QSR calculi (RCC-8, etc.).
+
+Key extensions:
+- FunctionalSupport (fsupport): Goal-conditioned sustainment relations
+- FunctionalContainment (fcontainment): Purpose-driven enclosure relations
+- Affordance-based spatial predicates
+- Force-dynamic constraint primitives
+
+References:
+- Bateman et al. (2010) - GUM Spatial Extension
+- Cohn &amp; Renz (2008) - Qualitative Spatial Reasoning
+- Herskovits (1986) - Functional geometry in spatial prepositions
+- Coventry et al. (2001) - Functional aspects of spatial language</rdfs:comment>
+        <owl:versionInfo>1.0</owl:versionInfo>
+    </owl:Ontology>
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties - Functional Spatial Relations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+    -->
+
+    <!-- Functional Support Relation -->
+    <owl:ObjectProperty rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#hasFunctionalSupport">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3.owl#gumrelation"/>
+        <rdfs:domain rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialEntity"/>
+        <rdfs:range rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialEntity"/>
+        <rdfs:comment>The functional support relation (fsupport) holds when entity x provides
+goal-conditioned sustainment for entity y. Unlike geometric support which requires
+horizontal surface contact, fsupport captures cases like hooks supporting mugs,
+nails supporting pictures, and pegs supporting coats. The relation encodes
+the force-dynamic schema of COUNTERFORCE against gravity.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!-- Functional Containment Relation -->
+    <owl:ObjectProperty rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#hasFunctionalContainment">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3.owl#gumrelation"/>
+        <rdfs:domain rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialEntity"/>
+        <rdfs:range rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialEntity"/>
+        <rdfs:comment>The functional containment relation (fcontainment) holds when entity x
+provides purpose-driven enclosure for entity y. Unlike topological containment
+which requires complete spatial inclusion, fcontainment captures cases like
+flowers in vases, fish in nets, and water in sieves with holes. The relation
+encodes the force-dynamic schema of RESTRAINT or LOCATION CONTROL.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!-- Affordance Relation -->
+    <owl:ObjectProperty rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#affords">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3.owl#gumrelation"/>
+        <rdfs:domain rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialEntity"/>
+        <rdfs:range rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialAffordance"/>
+        <rdfs:comment>Links a spatial entity to the affordances it provides, following
+Gibson's ecological approach. Affordances mediate between geometric properties
+and functional spatial relations.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!-- Force-Dynamic Schema Relation -->
+    <owl:ObjectProperty rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#involvesForceDynamic">
+        <rdfs:subPropertyOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3.owl#gumrelation"/>
+        <rdfs:domain rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSpatialRelation"/>
+        <rdfs:range rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#ForceDynamicSchema"/>
+        <rdfs:comment>Associates a functional spatial relation with its underlying
+force-dynamic schema (Talmy, 2000). Force dynamics provides the conceptual
+grounding for functional spatial semantics.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!-- QSR Constraint Mapping -->
+    <owl:ObjectProperty rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#mapsToConstraint">
+        <rdfs:domain rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3-space.owl#SpatialModality"/>
+        <rdfs:range rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#QSRConstraint"/>
+        <rdfs:comment>Maps a GUM SpatialModality to its corresponding FA-QSR constraint set.
+This is the core bridging relation for the translation pipeline.</rdfs:comment>
+    </owl:ObjectProperty>
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes - Functional Spatial Primitives
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+    -->
+
+    <!-- Spatial Entity -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialEntity">
+        <rdfs:subClassOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3.owl#SimpleThing"/>
+        <rdfs:comment>A physical or abstract entity that participates in spatial relations.
+Serves as the domain/range for FA-QSR spatial predicates.</rdfs:comment>
+    </owl:Class>
+
+    <!-- Functional Spatial Relation (Abstract) -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSpatialRelation">
+        <rdfs:subClassOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3-space.owl#FunctionalSpatialModality"/>
+        <rdfs:comment>Abstract class for all functional spatial relations that go beyond
+pure geometric/topological descriptions. These relations encode affordances,
+force-dynamics, and pragmatic function.</rdfs:comment>
+    </owl:Class>
+
+    <!-- Functional Support Class -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSupport">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSpatialRelation"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3-space.owl#Support"/>
+        <rdfs:comment>Functional support (fsupport) represents goal-conditioned sustainment
+where an entity maintains another entity's position against gravity or other
+forces. Distinguished from geometric support by not requiring horizontal
+surface contact.
+
+Examples:
+- A hook fsupports a mug (vertical attachment)
+- A nail fsupports a picture (wall-mounted)
+- A peg fsupports a coat (protruding element)
+- A branch fsupports a bird (non-horizontal surface)</rdfs:comment>
+    </owl:Class>
+
+    <!-- Subtypes of Functional Support -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#HangingSupport">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSupport"/>
+        <rdfs:comment>Support via suspension from above (hooks, hangers, branches).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#AdhesiveSupport">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSupport"/>
+        <rdfs:comment>Support via adhesion to vertical or inclined surfaces (magnets, tape, glue).
+Enables "on the wall" interpretations.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#EngagementSupport">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSupport"/>
+        <rdfs:comment>Support via mechanical engagement (pegs, slots, interlocking).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#BuoyancySupport">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSupport"/>
+        <rdfs:comment>Support via fluid buoyancy (boats on water, balloons in air).</rdfs:comment>
+    </owl:Class>
+
+    <!-- Functional Containment Class -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalContainment">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSpatialRelation"/>
+        <rdfs:subClassOf rdf:resource="http://www.ontospace.uni-bremen.de/ontology/stable/GUM-3-space.owl#Containment"/>
+        <rdfs:comment>Functional containment (fcontainment) represents purpose-driven
+enclosure where an entity restricts another entity's movement or provides
+locational control without necessarily complete spatial enclosure.
+
+Examples:
+- A vase fcontains flowers (open top)
+- A net fcontains fish (permeable boundary)
+- A fence fcontains sheep (partial barrier)
+- A room fcontains furniture (access points exist)</rdfs:comment>
+    </owl:Class>
+
+    <!-- Subtypes of Functional Containment -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#PartialContainment">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalContainment"/>
+        <rdfs:comment>Containment with deliberate apertures (vases, cups, bowls).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#PermeableContainment">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalContainment"/>
+        <rdfs:comment>Containment with permeable boundaries (nets, cages, sieves).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#BoundaryContainment">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalContainment"/>
+        <rdfs:comment>Containment via boundary demarcation (fences, borders, outlines).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#ContextualContainment">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalContainment"/>
+        <rdfs:comment>Containment defined by context/convention (city in a country, item in a list).</rdfs:comment>
+    </owl:Class>
+
+    <!-- Spatial Affordance Classes -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialAffordance">
+        <rdfs:comment>An affordance relevant to spatial relations. Based on Gibson's
+ecological psychology, adapted for spatial language understanding.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#SupportAffordance">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialAffordance"/>
+        <rdfs:comment>The capacity to provide physical support against gravity.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#ContainmentAffordance">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialAffordance"/>
+        <rdfs:comment>The capacity to contain or restrain other entities.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#AccessAffordance">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#SpatialAffordance"/>
+        <rdfs:comment>The capacity to provide or restrict access to a region.</rdfs:comment>
+    </owl:Class>
+
+    <!-- Force-Dynamic Schema Classes (Talmy, 2000) -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#ForceDynamicSchema">
+        <rdfs:comment>Abstract class for force-dynamic patterns underlying spatial semantics.
+Based on Talmy's (2000) force dynamics framework.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#Counterforce">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#ForceDynamicSchema"/>
+        <rdfs:comment>Force opposition schema - one entity exerts force against another
+(e.g., support against gravity).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#Restraint">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#ForceDynamicSchema"/>
+        <rdfs:comment>Movement restriction schema - one entity limits another's motion
+(e.g., containment, blocking).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#Enablement">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#ForceDynamicSchema"/>
+        <rdfs:comment>Action facilitation schema - one entity enables another's action
+(e.g., path provides passage).</rdfs:comment>
+    </owl:Class>
+
+    <!-- QSR Constraint Classes -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#QSRConstraint">
+        <rdfs:comment>A constraint in the FA-QSR constraint network. Represents either
+geometric (RCC-8 based) or functional constraint types.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#GeometricConstraint">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#QSRConstraint"/>
+        <rdfs:comment>A purely geometric/topological constraint from RCC-8 or similar calculi.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalConstraint">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#QSRConstraint"/>
+        <rdfs:comment>A functional constraint encoding affordances and force-dynamics.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#HybridConstraint">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#QSRConstraint"/>
+        <rdfs:comment>A hybrid constraint combining geometric and functional requirements.</rdfs:comment>
+    </owl:Class>
+
+    <!-- Complexity Classification -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#ComplexityClass">
+        <rdfs:comment>Classification of constraint fragments by computational complexity.</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#TractableFragment">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#ComplexityClass"/>
+        <rdfs:comment>Polynomial-time solvable constraint fragments (e.g., pure RCC-8 Horn).</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#IntractableFragment">
+        <rdfs:subClassOf rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#ComplexityClass"/>
+        <rdfs:comment>NP-hard constraint fragments (e.g., mixed functional-geometric).</rdfs:comment>
+    </owl:Class>
+
+    <!--
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Axioms - Functional Primitive Definitions
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+    -->
+
+    <!-- fsupport implies some form of contact or connection -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalSupport">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#involvesForceDynamic"/>
+                <owl:someValuesFrom rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#Counterforce"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <!-- fcontainment implies restraint force schema -->
+    <owl:Class rdf:about="http://faqsr.spatial-reasoning.org/ontology/faqsr#FunctionalContainment">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#involvesForceDynamic"/>
+                <owl:someValuesFrom rdf:resource="http://faqsr.spatial-reasoning.org/ontology/faqsr#Restraint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+</rdf:RDF>

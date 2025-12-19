@@ -1,0 +1,132 @@
+{
+  "corpus_statistics": {
+    "total_sentences": 100,
+    "total_triples": 100,
+    "preposition_counts": {
+      "on": 25,
+      "inside": 8,
+      "in": 11,
+      "within": 6,
+      "left of": 8,
+      "beside": 9,
+      "behind": 1,
+      "below": 1,
+      "above": 3,
+      "in front of": 3,
+      "at": 10,
+      "by": 4,
+      "near": 7,
+      "next to": 4
+    },
+    "sense_distribution": {
+      "support": 20,
+      "hanging": 4,
+      "adhesion": 1,
+      "containment": 25,
+      "lateral": 17,
+      "projective": 4,
+      "vertical": 4,
+      "location": 10,
+      "adjacency": 8,
+      "proximity": 7
+    },
+    "functional_ratio": 0.5,
+    "geometric_ratio": 0.25,
+    "hybrid_ratio": 0.25
+  },
+  "experiments": {
+    "complexity": {
+      "name": "complexity_comparison",
+      "parameters": {
+        "sizes": [
+          3,
+          5,
+          7,
+          10,
+          15
+        ],
+        "trials": 5
+      },
+      "metrics": {
+        "geometric_tractable_pct": 100.0,
+        "geometric_avg_time_ms": 0.5402640055399388,
+        "geometric_consistent_pct": 36.0,
+        "functional_tractable_pct": 8.0,
+        "functional_avg_time_ms": 8.545595998875797,
+        "functional_consistent_pct": 100.0,
+        "hybrid_tractable_pct": 12.0,
+        "hybrid_avg_time_ms": 8.891656000632793,
+        "hybrid_consistent_pct": 100.0
+      },
+      "notes": []
+    },
+    "consistency": {
+      "name": "consistency_benchmark",
+      "parameters": {
+        "sizes": [
+          3,
+          5,
+          10,
+          15,
+          20
+        ],
+        "trials": 10
+      },
+      "metrics": {
+        "accuracy": 100.0,
+        "avg_time_ms": 31.054013998655137,
+        "total_tests": 100
+      },
+      "notes": []
+    },
+    "sense_disambiguation": {
+      "name": "sense_disambiguation",
+      "parameters": {},
+      "metrics": {
+        "overall_accuracy": 86.0,
+        "functional_precision": 100.0,
+        "geometric_precision": 78.125,
+        "accuracy_on": 100.0,
+        "accuracy_within": 0.0,
+        "accuracy_above": 100.0,
+        "accuracy_at": 100.0,
+        "accuracy_next to": 100.0,
+        "accuracy_inside": 0.0,
+        "accuracy_in": 100.0,
+        "accuracy_beside": 100.0,
+        "accuracy_left of": 100.0,
+        "accuracy_behind": 100.0,
+        "accuracy_near": 100.0,
+        "accuracy_by": 100.0,
+        "accuracy_below": 100.0,
+        "accuracy_in front of": 100.0
+      },
+      "notes": []
+    },
+    "constraint_generation": {
+      "name": "constraint_generation",
+      "parameters": {},
+      "metrics": {
+        "type_accuracy": 86.0,
+        "avg_confidence": 0.92,
+        "functional_coverage": 36.0
+      },
+      "notes": []
+    },
+    "cognitive": {
+      "name": "cognitive_correlation",
+      "parameters": {},
+      "metrics": {
+        "functional_avg_difficulty": 2.72,
+        "geometric_avg_difficulty": 1.68,
+        "difficulty_difference": 1.0400000000000003,
+        "supports_hypothesis": true
+      },
+      "notes": [
+        "Hypothesis: Functional prepositions require more cognitive effort",
+        "Functional mean difficulty: 2.72",
+        "Geometric mean difficulty: 1.68"
+      ]
+    }
+  }
+}
